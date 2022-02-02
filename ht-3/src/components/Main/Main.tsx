@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import { Clicker } from "../Clicker";
+import { Form } from "../Form";
 import "./main.css";
 
 export const Main: React.FC = (): JSX.Element => {
-  let [openClicker, setOpenClicker] = React.useState<boolean>(false);
+  let [openForm, setOpenForm] = React.useState<boolean>(false);
   let [menu, setMenu] = React.useState<boolean>(false);
   return (
     <div className="main">
       <div
         className="button_open"
         onClick={() => {
-          setOpenClicker(!openClicker);
+          setOpenForm(!openForm);
           setMenu(!menu);
         }}
       >
-        {menu ? "Скрыть счётчик" : "Показать счётчик"}
+        {menu ? "Скрыть форму" : "Показать форму"}
       </div>
-      {openClicker ? <Clicker /> : null}
+      {openForm ? <Form /> : null}
     </div>
   );
 };
