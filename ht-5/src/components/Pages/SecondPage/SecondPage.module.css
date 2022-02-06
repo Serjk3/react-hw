@@ -1,0 +1,18 @@
+.main__content {
+  padding: 25px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.main__content_left {
+  padding: 25px 40px;
+}
+
+.main__content_right {
+  padding: 25px 40px;
+}

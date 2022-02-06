@@ -1,0 +1,13 @@
+.main__content {
+  padding: 25px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__content_left {
+  padding: 25px 40px;
+}
+
+.main__content_right {
+  padding: 25px 40px;
+}
