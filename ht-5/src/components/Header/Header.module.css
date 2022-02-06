@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 25px 40px;
+  background-color: rgb(33, 2, 173);
+}
+
+.header__logo {
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgb(164, 143, 255);
+}
+.header__logo::after {
+  content: "logo";
+  color: rgb(255, 255, 255);
+}
+
+.header__menu {
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.header__menu_link {
+  margin-right: 15px;
+  color: #fff;
+}
+.header__menu_link li:last-child {
+  margin-right: 0;
+}
+/* commit */
