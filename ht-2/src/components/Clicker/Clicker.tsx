@@ -35,5 +35,3 @@ export const Clicker: React.FC = (): JSX.Element => {
     </div>
   );
 };
-
-//commit
