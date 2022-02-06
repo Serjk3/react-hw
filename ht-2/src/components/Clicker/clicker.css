@@ -1,0 +1,60 @@
+.main_clicker {
+  width: 350px;
+  border: 2px solid rgb(73, 73, 73);
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.display_clicker {
+  padding: 50px;
+}
+
+.number {
+  text-align: center;
+  font-size: 6rem;
+  font-weight: 600;
+  color: rgb(72, 104, 128);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.buttons_all {
+  cursor: pointer;
+  padding: 40px 30px;
+  transition: ease-out 0.2s;
+}
+
+.buttons_all i {
+  text-align: center;
+  font-size: 2rem;
+  color: rgb(73, 73, 73);
+  font-weight: 600;
+}
+
+.plus_button {
+  background-color: #28a745;
+}
+
+.plus_button:hover {
+  background-color: #198b33;
+}
+
+.null_button {
+  background-color: #fec107;
+}
+
+.null_button:hover {
+  background-color: #c99700;
+}
+
+.minus_button {
+  background-color: #dc3545;
+}
+
+.minus_button:hover {
+  background-color: #b81c2c;
+}
