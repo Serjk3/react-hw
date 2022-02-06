@@ -50,7 +50,7 @@ const content = (
       aliquam id quos eos rem eligendi modi qui? Tenetur, numquam aperiam
       eligendi alias id ea culpa consequuntur hic necessitatibus blanditiis
       molestiae perferendis reprehenderit fugit, ipsum saepe fugiat libero ad ab
-      dolorem?
+      dolorem?Change for commit
     </div>
     <div className="main-content__right">
       <img src="https://picsum.photos/350/450" alt="" />
