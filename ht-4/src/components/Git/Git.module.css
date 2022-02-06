@@ -64,3 +64,30 @@ li {
 .selected {
   font-weight: 700;
 }
+
+.search__error {
+  font-family: inherit;
+  font-size: 1rem;
+  color: rgb(202, 0, 0);
+}
+
+.users__item {
+  font-family: inherit;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.user__detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user__avatar {
+  width: 350px;
+}
+
+.user__avatar img {
+  width: 100%;
+  height: auto;
+}

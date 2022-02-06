@@ -1,99 +1,101 @@
 import React, { useEffect, useState } from "react";
-import "./git.css";
-import axios from "axios";
+import { getApiResource } from "../../utils/API";
+import styles from "./Git.module.css";
 
-type SearchUser = {
+interface ISearch {
   login: string;
   id: number;
-};
+}
 
-type SearchResult = {
-  items: SearchUser[];
-};
-
-type User = {
+interface IUsers {
   login: string;
+  name: string;
   id: number;
   avatar_url: string;
   followers: number;
-};
+  html_url: string;
+}
 
 export const Git = () => {
-  const [selectedUser, setSelectedUser] = useState<SearchUser | null>(null);
-  const [userDetails, setUserDetails] = useState<User | null>(null);
-  const [users, setUsers] = useState<SearchUser[]>([]);
-  const [tempSearch, setTempSearch] = useState("");
-  const [searchTerm, setsearchTerm] = useState("");
+  const [selectedUser, setSelectedUser] = useState<ISearch | null>(null);
+  const [userInfo, setUserInfo] = useState<IUsers | null>(null);
+  const [usersList, setUsersList] = useState<ISearch[]>([]);
+  const [inputSearch, setInputSearch] = useState("Введите имя пользователя");
+  const [searchRes, setSearchRes] = useState("");
+  const SEARCH_RESULT: string = `https://api.github.com/search/users?q=${inputSearch}`;
+
+  const getUsersList = async (url: string) => {
+    const res = await getApiResource(url);
+    setUsersList(res.items);
+  };
+
+  const getUserData = async (url: string) => {
+    const res = await getApiResource(url);
+    setUserInfo(res);
+  };
 
   useEffect(() => {
-    console.log("Title");
-    if (selectedUser) {
-      document.title = selectedUser.login;
-    }
-  }, [selectedUser]);
-
-  useEffect(() => {
-    console.log("Axios");
-
-    axios
-      .get<SearchResult>(`https://api.github.com/search/users?q=${tempSearch}`)
-      .then((response) => {
-        setUsers(response.data.items);
-      });
-  }, [searchTerm]);
-  useEffect(() => {
-    console.log("Axios user");
-    if (!!selectedUser) {
-      axios
-        .get<User>(`https://api.github.com/users/${selectedUser.login}`)
-        .then((response) => {
-          setUserDetails(response.data);
-        });
-    }
-  }, [selectedUser]);
+    getUsersList(SEARCH_RESULT);
+    if (!!selectedUser)
+      getUserData(`https://api.github.com/users/${selectedUser.login}`);
+  }, [searchRes, selectedUser]);
 
   return (
-    <div className="container">
-      <div>
-        <div>
+    <div className={styles.container}>
+      <div className={styles.section__search}>
+        <div className={styles.form__search}>
           <input
-            value={tempSearch}
-            onChange={(e) => setTempSearch(e.currentTarget.value)}
-            type="search"
+            value={inputSearch}
+            onClick={(e) => setInputSearch("")}
+            onChange={(e) => setInputSearch(e.currentTarget.value)}
+            type="text"
             placeholder="Введите имя пользователя"
           />
           <button
             onClick={() => {
-              setsearchTerm(tempSearch);
+              setSearchRes(inputSearch);
             }}
           >
             Find
           </button>
         </div>
-        <ul>
-          {users.map((user) => (
-            <li
-              key={user.id}
-              className={selectedUser === user ? "selected" : ""}
-              onClick={() => {
-                setSelectedUser(user);
-              }}
-            >
-              {user.login}
-            </li>
-          ))}
+        <ul className={styles.users__list}>
+          {usersList.length === 0 ? (
+            <div className={styles.search__error}>
+              Имя пользователя не введено, либо введено некорректно
+            </div>
+          ) : (
+            usersList.map((item) => (
+              <li
+                key={item.id}
+                className={styles.users__item}
+                onClick={() => {
+                  setSelectedUser(item);
+                }}
+              >
+                {item.login}
+              </li>
+            ))
+          )}
         </ul>
       </div>
-      <div>
-        {userDetails && <h2>{userDetails.login}</h2>}
-        {userDetails && (
+      {userInfo && (
+        <div className={styles.user__detail}>
+          <h2>{userInfo.login}</h2>
           <div>
-            <img src={userDetails.avatar_url} alt={"avatar"} />
-            <br />
-            {userDetails.login}, followers: {userDetails.followers}
+            <div className={styles.user__avatar}>
+              <img src={userInfo.avatar_url} alt="Img" />
+            </div>
+            <div className={styles.user__name}>Name: {userInfo.name}</div>
+            <div className={styles.user__followers}>
+              Followers: {userInfo.followers}
+            </div>
+            <a href={userInfo.html_url} className={styles.user__url}>
+              User Url
+            </a>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
